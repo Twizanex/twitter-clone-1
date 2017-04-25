@@ -1,0 +1,44 @@
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+}
+
+body {
+	/*min-height: 2000px;*/
+	padding-top: 70px;
+	background-color: grey;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.avatar-round {
+	border-radius: 50%;
+	height: 32px;
+	width: 32px;
+	margin-top: 10px;
+}
+
+.personal,
+.main,
+.links
+ {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 15px;
+}
+
+.avatar {
+	border: 1px solid white;
+	border-radius: 3px;
+}
