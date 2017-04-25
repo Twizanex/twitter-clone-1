@@ -14,12 +14,7 @@
 body {
 	/*min-height: 2000px;*/
 	padding-top: 70px;
-	background-color: grey;
-}
-
-.wrapper {
-	width: 90%;
-	margin: 0 auto;
+	background-color: #f5f8fa;
 }
 
 .avatar-round {
@@ -36,9 +31,22 @@ body {
 	background-color: #fff;
 	border-radius: 5px;
 	padding: 15px;
+	border: 1px solid #e6ecf0;
 }
 
 .avatar {
-	border: 1px solid white;
-	border-radius: 3px;
+	border: 2px solid #fff;
+	border-radius: 7px;
+}
+
+.info {
+	padding-top: 90px;
+}
+
+.col-md-4 span {
+	font-weight: bold;
+}
+
+.borders {
+    border: 1px solid #e6ecf0;
 }
