@@ -27,11 +27,30 @@ body {
 .personal,
 .main,
 .links
- {
+{
 	background-color: #fff;
 	border-radius: 5px;
 	padding: 15px;
 	border: 1px solid #e6ecf0;
+}
+
+form.form-inline {
+	background-color: #e5e5e5;
+    margin: -15px;
+    margin-bottom: 15px;
+    border-radius-top-left: 5px;
+    border-radius-top-right: 5px;
+    padding: 15px;
+}
+
+.avatar-form {
+	height: 34px;
+	border-radius: 3px;
+}
+
+.tweets {
+    min-height: 51px;
+	padding: 9px 12px;
 }
 
 .avatar {

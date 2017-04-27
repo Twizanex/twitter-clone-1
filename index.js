@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 
 var path = require('path');
+var users = require('./data/users.json');
 var bodyParser = require('body-parser');
 
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -11,7 +12,7 @@ app.post('/login', function(req, res) {
 	var valid = false;
     
     for (var i=0; i <users.length; i++) {
-        if ((body.login === users[i].login) && (body.password === users[i].password)) {
+        if ((body.login === users[i].nickname) && (body.password === users[i].password)) {
             valid = true;
             break;
         }
