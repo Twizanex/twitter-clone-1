@@ -1,0 +1,26 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "Final project for Artinov Web School",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aramei/twitter-clone.git"
+  },
+  "author": "Artur Pasichnyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aramei/twitter-clone/issues"
+  },
+  "homepage": "https://github.com/aramei/twitter-clone#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "mongoose": "^4.9.6"
+  }
+}

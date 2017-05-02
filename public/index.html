@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="http://localhost:3000/favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="http://localhost:3000/favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href="./styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./styles/styles.css">
 	<title>Twitter</title>
@@ -70,11 +72,11 @@
 					  <div class="form-group">
 					  <img class="avatar-form" src="https://pbs.twimg.com/profile_images/3739639472/b9338383705abab7395b24f1cd887ec8_bigger.jpeg">
 					    <div class="input-group">
-					      <input type="text" class="form-control" id="exampleInputAmount" placeholder="What's happening">
+					      <input type="text" class="form-control" id="tweetInput" placeholder="What's happening">
 					      <div class="input-group-addon">Photo</div>
 					    </div>
 					  </div>
-					  <button type="submit" class="btn btn-primary">Tweet</button>
+					  <button type="submit" class="btn btn-primary" id="tweetButton">Tweet</button>
 					</form>
 
 					<div class="tweet">
@@ -118,7 +120,11 @@
 			</div>
 		</div>
 	</div>
-</div>
+
+	<div class="hollow"></div>
+
+<script src="/vendors/jquery.min.js"></script>
+<script src="/scripts/client.js"></script>
 
 </body>
 </html>

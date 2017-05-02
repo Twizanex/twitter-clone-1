@@ -1,30 +1,38 @@
-var hollowDiv = $(".hollow");
+// window.onload = function () {
+
+// };
+
+var tweetButton = $("#tweetButton");
+var tweetInput = $("#tweetInput");
 
 
-$("#loginButton").click(function(event) {
-    var login = $("[name='login']").val();
-    var password = $("[name='password']").val();
-    event.preventDefault(event);
+tweetButton.click(function() {
+    event.preventDefault()
+
+    var date = new Date();
+    // id = id.toString();
+    // id = btoa(id);
+
+    var newTweet = {
+        text: tweetInput.val(),
+        date: date
+    };
 
     $.ajax({
-        url: "/login",
+        url: "/tweet/add",
         method: "POST",
-        data: {
-            "login": login,
-            "password": password
-        },
+        data: newTweet
     }).then(function(res) {
-        hollowDiv.empty();
+        console.log(res)
+
         if (res == true) {
-            console.log("success login");
-            hollowDiv.append('<div class="alert alert-success" role="alert">Authorization success. Your data is correct!</div>');
-            hollowDiv.css("display", "block");
-
+            tweetInput.val("");
         } else {
-            console.log("wrong cred");
-            hollowDiv.append('<div class="alert alert-danger" role="alert">Authorization failed. Plesase check your login and password</div>');
-            hollowDiv.css("display", "block");
-        }
-
-    })
+            alert("Error when saving tweet: " + res)
+        };
+    });
 });
+
+function checkInput() {
+    var constraints = "^[a-zA-Z0-9\s]{1,140}$";
+};
