@@ -16,9 +16,7 @@ $("#loginButton").click(function(event) {
     }).then(function(res) {
         hollowDiv.empty();
         if (res == true) {
-            hollowDiv.append('<div class="alert alert-success" role="alert">Authorization success. Your data is correct!</div>');
-            hollowDiv.css("display", "block");
-
+            window.location.href = '/';
         } else {
             hollowDiv.append('<div class="alert alert-danger" role="alert">Authorization failed. Plesase check your login and password</div>');
             hollowDiv.css("display", "block");
@@ -44,6 +42,7 @@ $("#signUpButton").click(function(event) {
     }).then(function(res) {
             hollowDiv.empty();
             if (res == true) {
+                window.location.href = '/';
                 hollowDiv.append('<div class="alert alert-success" role="alert">Authorization success. Your data is correct!</div>');
                 hollowDiv.css("display", "block");
 

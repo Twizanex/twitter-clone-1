@@ -1,9 +1,12 @@
 var express = require("express");
 var app = express();
-var mongoose = require('mongoose');
-var path = require('path');
-var bodyParser = require('body-parser');
-var date = new Date();
+var mongoose = require("mongoose");
+var path = require("path");
+var bodyParser = require("body-parser");
+var uuidV4 = require("uuid/v4");
+var Cookies = require("cookies");
+
+var sessionGenerate = uuidV4();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
@@ -20,6 +23,7 @@ var userSchema = new mongoose.Schema({
     name    : { type: String, trim: true, required: true },
     email   : { type: String, trim: true, required: true },
     password: { type: String, required: true },
+    session : { type: String, default: '' },
     picture : { type: String, default: '' }
 });
 
@@ -28,11 +32,11 @@ var tweetSchema = new mongoose.Schema({
     text    : { type: String, required: true },
     date    : { type: Date, default: Date.now },
     picture : { type: String, default: '' }
-})
+});
+
 
 var Tweet = mongoose.model('Tweet', tweetSchema);
 var User = mongoose.model('Users', userSchema);
-
 
 app.get("/login", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/login.html"));
@@ -43,18 +47,21 @@ app.post("/signup", function(req, res) {
     var user = new User ({
         name: body.name,
         email: body.email,
-        password: body.password
+        password: body.password,
+        session: sessionGenerate
     });
     console.log(user);
     user.save(function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('meow');
-      }
+        if (err)
+            console.log("User wasn't registered");
+    });
+    res.cookie("sessionId", sessionGenerate, {
+        expires: new Date(Date.now() + 1800000),
+        httpOnly: true
     });
     res.send("user registered successully");
 });
+
 
 app.post('/login', function(req, res) {
     var body = req.body;
@@ -62,15 +69,24 @@ app.post('/login', function(req, res) {
 
     User.findOne({ email: body.email, password: body.password }, function(err, user) {
         if (err || user == null) {
-            res.send(err);
+            res.send("Wrong user credential");
             return;
         } else {
             valid = true;
+            user.update({session: sessionGenerate}, function (err) {
+                if (err)
+                    console.log(err); 
+            });
+            console.log(sessionGenerate);
+            res.cookie("sessionId", sessionGenerate, {
+                expires: new Date(Date.now() + 1800000),
+                httpOnly: true
+            });
             res.send(valid);
         }
     });
 });
-
+ 
 app.post("/tweet/add", function(req, res) {
     console.log(req.body);
     var newTweet = new Tweet(req.body);
@@ -85,7 +101,7 @@ app.post("/tweet/add", function(req, res) {
 });
 
 app.get("/tweet", function(req, res) {
-    Tweet.findOne({}, function(err, tweet){
+    Tweet.find({}, function(err, tweet){
         if (err) {
             res.send(err);
         } else {
