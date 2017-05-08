@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/', express.static(path.join(__dirname, 'public')));
 
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/tweet", function(err) {
     if (err) {
         console.log("Connection issue: " + err)
@@ -42,6 +43,10 @@ app.get("/login", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/login.html"));
 });
 
+app.get("/profile", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/profile.html"));
+});
+
 app.post("/signup", function(req, res) {
     var body = req.body;
     var user = new User ({
@@ -59,7 +64,8 @@ app.post("/signup", function(req, res) {
         expires: new Date(Date.now() + 1800000),
         httpOnly: true
     });
-    res.send("user registered successully");
+    // res.send("user registered successully");
+    res.redirect("/profile");
 });
 
 
@@ -78,10 +84,8 @@ app.post('/login', function(req, res) {
                     console.log(err); 
             });
             console.log(sessionGenerate);
-            res.cookie("sessionId", sessionGenerate, {
-                expires: new Date(Date.now() + 1800000),
-                httpOnly: true
-            });
+            var cookies = new Cookies(req, res);
+            cookies.set( "userId", 1, { maxAge: 365*86400000 } ).set( "sessionId", sessionGenerate, { maxAge: 365*86400000 } );
             res.send(valid);
         }
     });
@@ -89,7 +93,12 @@ app.post('/login', function(req, res) {
  
 app.post("/tweet/add", function(req, res) {
     console.log(req.body);
+    var cookies = new Cookies(req, res);
+    var userId = cookies.get("userId");
+    var sessionId = cookies.get("sessionId");
+
     var newTweet = new Tweet(req.body);
+
 
     newTweet.save(function(err) {
         if (err) {

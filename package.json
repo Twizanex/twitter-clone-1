@@ -21,6 +21,7 @@
     "express": "^4.15.2"
   },
   "devDependencies": {
+    "cookies": "^0.7.0",
     "mongoose": "^4.9.6",
     "uuid": "^3.0.1"
   }
