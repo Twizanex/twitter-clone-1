@@ -1,21 +1,14 @@
-// window.onload = function () {
-
-// };
-
 var tweetButton = $("#tweetButton");
 var tweetInput = $("#tweetInput");
 
+$(document).ready(function() {
+    var user = localStorage.getItem("user");
+});
 
 tweetButton.click(function() {
     event.preventDefault()
-
-    var date = new Date();
-    // id = id.toString();
-    // id = btoa(id);
-
     var newTweet = {
-        text: tweetInput.val(),
-        date: date
+        text: tweetInput.val()
     };
 
     $.ajax({
@@ -32,7 +25,3 @@ tweetButton.click(function() {
         };
     });
 });
-
-function checkInput() {
-    var constraints = "^[a-zA-Z0-9\s]{1,140}$";
-};

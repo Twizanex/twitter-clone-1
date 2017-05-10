@@ -1,10 +1,9 @@
 var hollowDiv = $(".hollow");
 
-
 $("#loginButton").click(function(event) {
+    event.preventDefault(event);
     var email = $("[name='email']").val();
     var password = $("[name='password']").val();
-    event.preventDefault(event);
 
     $.ajax({
         url: "/login",
@@ -16,7 +15,7 @@ $("#loginButton").click(function(event) {
         },
     }).then(function(res) {
         console.log(res);
-        localStorage.setItem(res, JSON.stringify(res));
+        localStorage.setItem("user", JSON.stringify(res));
         window.location.replace("/");  
     }, function(error) {
         var message = error.responseJSON && error.responseJSON.message || 'An error occured';
@@ -24,5 +23,3 @@ $("#loginButton").click(function(event) {
         hollowDiv.css("display", "block");  
     });
 });
-
-
