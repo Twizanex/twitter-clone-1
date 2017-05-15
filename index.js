@@ -62,9 +62,9 @@ var tweetSchema = new mongoose.Schema({
     picture : { type: String, default: "" }
 });
 
-
 var Tweet = mongoose.model("Tweet", tweetSchema);
 var User = mongoose.model("Users", userSchema);
+
 
 app.get("/login", function(req, res) {
     res.sendFile(path.join(__dirname, "./public/login.html"));
@@ -107,6 +107,7 @@ app.post("/login", function(req, res) {
         }
         user.session = sessionGenerate();
         console.log(user);
+        
         user.save(function(err) {
             if (err) {
                 console.error(err);

@@ -2,7 +2,16 @@ var tweetButton = $("#tweetButton");
 var tweetInput = $("#tweetInput");
 
 $(document).ready(function() {
-    var user = localStorage.getItem("user");
+    // var user = localStorage.getItem("user");
+
+    $.ajax({
+        url: "/tweet",
+        method: "GET"
+    }).then(function(tweet) {
+        tweet.forEach(function(tweet) {
+            
+        })
+    })
 });
 
 tweetButton.click(function() {
