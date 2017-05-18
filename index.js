@@ -107,7 +107,7 @@ app.post("/login", function(req, res) {
         }
         user.session = sessionGenerate();
         console.log(user);
-        
+
         user.save(function(err) {
             if (err) {
                 console.error(err);
@@ -121,10 +121,10 @@ app.post("/login", function(req, res) {
     });
 });
 
-app.post("/profile", apiAuthMiddleware, function(req, res) {
+app.post("/profile/save", apiAuthMiddleware, function(req, res) {
     var updatedUser = Object.assign(req._user, req.body);
     updatedUser.save(function(err, user) {
-        if (err || _id == null) {
+        if (err || id == null) {
             res.send(userLogged);
             return;
         } else {
